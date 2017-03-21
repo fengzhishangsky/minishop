@@ -1,2 +1,2 @@
 # minishop
-minishop 第一版
+小微企业电子商务解决方案
