@@ -27,7 +27,7 @@
           <div class="header"><a href="{:url('index/index')}"><img  src="{:config('theme_path')}/index/images/login_logo.png" /></a><span class="line_left">|</span><span ><a href="{:url('base/register')}">会员注册</a></span></div>
           
         </div>
-        <div class="col-xs-2 contract"><a href="{:url('index/index')}">返回首页</a><span style="padding:0 5px 0 5px">|</span><span ><a href="{:url('article/page',['name'=>'job'])}">联系我们</a></div>
+        <div class="col-xs-2 contract"><a href="{:url('index/index')}">返回首页</a><span style="padding:0 5px 0 5px">|</span><a href="{:url('article/page',['name'=>'job'])}">客服</a><span style="padding:0 5px 0 5px">|</span><a href="{:url('article/page',['name'=>'job'])}">English </a></div>
         
       </div>
    </div>
@@ -38,19 +38,21 @@
   <div class="main_register">
     <div class="register">
       <div class="row">
-
+        <div class="register_title">深圳市没有品牌有限公司</div>
       <!--register start-->
-      <form action="" method="POST">
-        <div class="col-xs-8" style="height:656px" >
-          <table class="input-register-table" style="margin-left:100px;margin-top:20px">
+       <div class="col-xs-5" style="height:656px;" >
+       <div style="padding: 10px 10px;border: 1px solid red;margin-left:20px;margin-top: 50px;">
+      <form action="" method="POST" class="margintop-40" style="">
+       
+            <table class="input-register-table" style="padding: 20px 10px;margin-top:20px;">
                 <tr>
                     <td><label for="txtname">用户名 :</label></td>
                     <td><input type="text"  placeholder="请设置用户名" id="username"/></td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td><label for="txtname">用户昵称 :</label></td>
                     <td><input type="text"  placeholder="请输入用户昵称" id="nickname"/></td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td><label for="txtname">密码 :</label></td>
                     <td><input type="password"  placeholder="请输入6-20位(字母、数字、符号)" id="password" /></td>
@@ -71,21 +73,21 @@
                     <td><label for="txtpswd">确认密码 :</label></td>
                     <td><input type="password"  placeholder="请再次输入密码" id="repassword" /></td>
                 </tr>
-                <tr>
-                    <td><label for="txtpswd">图形验证码 :</label></td>
-                    <td><input type="text"    placeholder="请输入图形验证码" style="width:130px" id="pic_code" /><img src="{:url('base/captcha')}" onclick="this.src='{:url('admin/base/captcha')}?rand='+Math.random()" style="cursor:pointer;height:42px" title="点击刷新"></td>
-                </tr>
-                    <tr>
-                    <td><label for="txtname">手机号 :</label></td>
-                    <td><input type="text" id="mobile"  placeholder="可用于登录和找回密码" ></td>
-                </tr>
+               <!--  <tr>
+                   <td><label for="txtpswd">图形验证码 :</label></td>
+                   <td><input type="text"    placeholder="请输入图形验证码" style="width:130px" id="pic_code" /><img src="{:url('base/captcha')}" onclick="this.src='{:url('admin/base/captcha')}?rand='+Math.random()" style="cursor:pointer;height:42px" title="点击刷新"></td>
+                </tr> -->
+                    <!--<tr>
+                      <td><label for="txtname">手机号 :</label></td>
+                      <td><input type="text" id="mobile"  placeholder="可用于登录和找回密码" ></td>
+                  </tr>
                 <tr>
                     <td><label for="txtpswd">手机验证码 :</label></td>
                     <td><input type="text" placeholder="请输入手机验证码" id="sms_code"style="width:130px" name="login_pswd" /><input type="button" value="发送验证码"  onclick="sendSms()"class="password_button"  /></td>
-                </tr>
+                </tr> -->
                 
-        </table>
-        <div class="read">
+          </table>
+          <div class="read">
             <input type="checkbox" aria-label="..." ><span>我已阅读并遵守协议</span><span class="read_member" style="margin-left:20px">用户协议</span>
           </div>
           
@@ -95,11 +97,18 @@
           
      
           
-        </div>
-      </form>
+       
+        </form></div>
+       </div>
+
+       <div class="col-xs-1" width="100%" >
+        
+       
+        <div style="position:absolute;z-index:1; border-left: 1px dashed #000;height:100px;left:50%;line-height:1px;"></div>
+    </div>
       <!--register end-->
 
-        <div class="col-xs-4" >
+        <div class="col-xs-5 margintop-40 border-c " style="text-align: left;border:1px solid red;padding-left:50px;" >
           <div class="account">已有账号,<span style="color:#FF6600"><a href="{:url('base/login')}">马上登陆</a></span></div>
           <div class="line"></div>
           <div class="account_login">使用第三方账号登陆</div>
@@ -187,7 +196,20 @@ $(function(){
     var mobile    =$("#mobile").val();
     var password  =$("#password").val();
     var repassword=$("#repassword").val();
+    var pic_code = $("#pic_code").val();
     var code      =$("#sms_code").val();
+    if(pic_code == null || pic_code == ''){
+       alert('请输入图形验证码asd！');
+    }
+    if(username == null || username == '' || username.length>20 || username.length<6){
+       alert('请输入正确的用户名');
+    }
+    if(password == null || password == '' || username.length>20 || username.length<6){
+       alert('请输入正确的密码！');
+    }
+    if(repassword == null || repassword == '' || repassword!=password){
+       alert('确认密码不正确！');
+    }
   $.ajax({
      type:'post',
      url:"{:url('base/register')}",
